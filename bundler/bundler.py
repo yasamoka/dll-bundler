@@ -61,7 +61,6 @@ def _locate_extra_dependencies(dll_filepath, search_path_dll_map, extra_dependen
                 if dependency_dll_name not in extra_dependencies:
                     dependency_dll_filepath = Path(search_path, dependency_dll_name)
                     dependency_dll_copy_filepath = Path(package_dir, dependency_dll_filepath.name)
-                    print(dependency_dll_filepath, dependency_dll_copy_filepath)
                     copyfile(dependency_dll_filepath, dependency_dll_copy_filepath)
                     _locate_extra_dependencies(dependency_dll_copy_filepath, search_path_dll_map, extra_dependencies, package_dir)
             except KeyError:
