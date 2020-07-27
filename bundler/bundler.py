@@ -58,10 +58,12 @@ def _locate_extra_dependencies(dll_filepath, search_path_dll_map, extra_dependen
         if result == 126:
             try:
                 search_path = search_path_dll_map[dependency_dll_name]
-                dependency_dll_filepath = Path(search_path, dependency_dll_name)
-                dependency_dll_copy_filepath = Path(package_dir, dependency_dll_filepath.name)
-                copyfile(dependency_dll_filepath, dependency_dll_copy_filepath)
-                _locate_extra_dependencies(dependency_dll_copy_filepath, search_path_dll_map, extra_dependencies, package_dir)
+                if dependency_dll_name not in extra_dependencies:
+                    dependency_dll_filepath = Path(search_path, dependency_dll_name)
+                    dependency_dll_copy_filepath = Path(package_dir, dependency_dll_filepath.name)
+                    print(dependency_dll_filepath, dependency_dll_copy_filepath)
+                    copyfile(dependency_dll_filepath, dependency_dll_copy_filepath)
+                    _locate_extra_dependencies(dependency_dll_copy_filepath, search_path_dll_map, extra_dependencies, package_dir)
             except KeyError:
                 print(f"Dependency {dependency_dll_name} was not found in any search path. Aborting ...")
                 exit(1)
