@@ -52,7 +52,7 @@ def _locate_extra_dependencies(dll_filepath, search_path_dll_map, extra_dependen
             result = WindowsApi.loadModule(dependency_dll_name, cwd=dll_filepath.parent, architecture=architecture)
             assert result in (0, 126)
         except AssertionError:
-            print("Encountered error {result} for dependency {dependency_dll_name}. Aborting ...")
+            print(f"Encountered error {result} for dependency {dependency_dll_name}. Aborting ...")
             exit(1)
         
         if result == 126:
