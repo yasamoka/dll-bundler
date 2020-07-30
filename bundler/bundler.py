@@ -4,9 +4,6 @@ from pathlib import Path
 from shutil import copyfile
 
 from pefile import PE
-
-sys.path.insert(1, "dll-diagnostics")
-
 from dlldiag.common import WindowsApi, ModuleHeader
 
 
